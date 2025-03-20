@@ -29,7 +29,7 @@ This library is perfect for beginners and developers who want a simple way to wo
 ## Installation
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/TinyXmlHelper.git
+git clone https://github.com/FernandoFSA/TinyXmlHelper.git
 ```
 
 ### 2. Install TinyXML2
