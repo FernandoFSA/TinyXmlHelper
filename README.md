@@ -20,8 +20,11 @@ This library is perfect for beginners and developers who want a simple way to wo
 - [Building with CMake](#building-with-cmake)
 - [Environment Setup](#environment-setup)
 - [Example Usage](#example-usage)
+- [Real-World Example](#real-world-example)
 - [Contributing](#contributing)
 - [License](#license)
+- [Getting Help](#getting-help)
+- [Contributors](#contributors)
 
 ## Prerequisites
 - C++11 or later
@@ -115,8 +118,65 @@ int main() {
 }
 ```
 
+## Real-World Example
+Here's a more complex example of serializing and deserializing a custom object:
+
+```cpp
+#include "XmlElementWrapper.h"
+#include "XMLSerializable.h"
+#include <iostream>
+
+class Person : public XMLSerializable {
+public:
+    std::string name;
+    int age;
+
+    void Serialize(XmlElementWrapper& wrapper) const override {
+        wrapper << name << age;
+    }
+
+    void Deserialize(XmlElementWrapper& wrapper) override {
+        wrapper >> name >> age;
+    }
+};
+
+int main() {
+    tinyxml2::XMLDocument doc;
+    tinyxml2::XMLElement* root = doc.NewElement("people");
+    doc.LinkEndChild(root);
+
+    Person person;
+    person.name = "John Doe";
+    person.age = 30;
+
+    XmlElementWrapper wrapper(root);
+    wrapper << person;
+
+    tinyxml2::XMLPrinter printer;
+    doc.Print(&printer);
+    std::cout << printer.CStr() << std::endl;
+
+    Person deserializedPerson;
+    wrapper >> deserializedPerson;
+    std::cout << "Name: " << deserializedPerson.name << ", Age: " << deserializedPerson.age << std::endl;
+
+    return 0;
+}
+```
+
 ## Contributing
 Feel free to submit issues or pull requests! This project is open to improvements and feedback.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Getting Help
+If you need help, you can:
+- Check the [documentation](https://github.com/FernandoFSA/TinyXmlHelper/wiki).
+- Browse the [issues](https://github.com/FernandoFSA/TinyXmlHelper/issues) for similar questions.
+- Open a new issue with details about your problem.
+
+## Contributors
+Thanks to the following people who have contributed to this project:
+- [FernandoFSA](https://github.com/FernandoFSA)
+- [Your Name Here](https://github.com/yourusername)
