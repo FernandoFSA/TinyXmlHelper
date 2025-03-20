@@ -12,7 +12,7 @@
 // the data by printing it to the console. The resulting XML matches the specified structure:
 // <School><students><Student><name/><grades><math/><science/></grades></Student>...</students></School>
 
-// Grades class (similar to Platform)
+// Grades class
 class Grades : public XMLSerializable {
 public:
     Grades() {
@@ -26,7 +26,7 @@ public:
     }
 };
 
-// Student class (similar to LocationSet)
+// Student class
 class Student : public XMLSerializable {
 public:
     Student() {
@@ -81,7 +81,7 @@ public:
     }
 };
 
-// School class (similar to Imput)
+// School class
 class School : public XMLSerializable {
 public:
     School() {
