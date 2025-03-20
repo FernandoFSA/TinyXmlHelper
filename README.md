@@ -17,6 +17,7 @@ This library is perfect for beginners and developers who want a simple way to wo
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Building with CMake](#building-with-cmake)
 - [Environment Setup](#environment-setup)
 - [Example Usage](#example-usage)
 - [Contributing](#contributing)
@@ -51,6 +52,35 @@ Copy the `include/` and `src/` folders into your project. Then, include the head
 #include "XmlElementWrapper.h"
 #include "XMLSerializable.h"
 ```
+
+## Building with CMake
+TinyXmlHelper includes a `CMakeLists.txt` for easy building:
+
+1. **Install Prerequisites**:
+   - Ensure CMake is installed (`sudo apt-get install cmake` on Ubuntu).
+   - Install TinyXML2 (see [Environment Setup](#environment-setup)).
+
+2. **Build the Project**:
+   ```bash
+   mkdir build
+   cd build
+   cmake ..
+   cmake --build .
+   ```
+
+3. **Run the Example**:
+   ```bash
+   ./bin/simple_example  # On Linux/Mac
+   bin\simple_example.exe  # On Windows
+   ```
+
+4. **Integrate into Your Project**:
+   - Add TinyXmlHelper as a subdirectory in your CMake project:
+     ```cmake
+     add_subdirectory(TinyXmlHelper)
+     target_link_libraries(your_target PRIVATE TinyXmlHelper)
+     ```
+
 ## Environment Setup
 To use TinyXmlHelper, you’ll need:
 1. **A C++ Compiler**: GCC, Clang, or MSVC (C++11 or later)
