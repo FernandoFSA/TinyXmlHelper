@@ -95,91 +95,67 @@ To use TinyXmlHelper, you’ll need:
    ```
 
 ## Example Usage
-Here's a quick example of how to use `XmlElementWrapper` to serialize an integer:
-
-```cpp
-#include "XmlElementWrapper.h"
-#include <iostream>
-
-int main() {
-    tinyxml2::XMLDocument doc;
-    tinyxml2::XMLElement* root = doc.NewElement("root");
-    doc.LinkEndChild(root);
-
-    int value = 42;
-    XmlElementWrapper wrapper(root);
-    wrapper << value;
-
-    tinyxml2::XMLPrinter printer;
-    doc.Print(&printer);
-    std::cout << printer.CStr() << std::endl;
-
-    return 0;
-}
-```
-
-## Real-World Example
-Here's a more complex example of serializing and deserializing a custom object:
+Here's a quick example of how to use `XmlElementWrapper` to serialize and deserialize a custom object:
 
 ```cpp
 #include "XmlElementWrapper.h"
 #include "XMLSerializable.h"
+#include <tinyxml2.h>
 #include <iostream>
 
 class Person : public XMLSerializable {
 public:
-    std::string name;
-    int age;
-
-    void Serialize(XmlElementWrapper& wrapper) const override {
-        wrapper << name << age;
-    }
-
-    void Deserialize(XmlElementWrapper& wrapper) override {
-        wrapper >> name >> age;
+    Person() {
+        addData("name", std::string(""));
+        addData("age", 0);
     }
 };
 
 int main() {
+    // Create an XML document
     tinyxml2::XMLDocument doc;
-    tinyxml2::XMLElement* root = doc.NewElement("people");
-    doc.LinkEndChild(root);
+    tinyxml2::XMLElement* root = doc.NewElement("root");
+    doc.InsertFirstChild(root);
 
+    // Serialize
     Person person;
-    person.name = "John Doe";
-    person.age = 30;
-
-    XmlElementWrapper wrapper(root);
+    person.addData("name", std::string("Alice"));
+    person.addData("age", 25);
+    XmlElementWrapper wrapper(root, "person", true);
     wrapper << person;
 
-    tinyxml2::XMLPrinter printer;
-    doc.Print(&printer);
-    std::cout << printer.CStr() << std::endl;
+    // Save to file
+    doc.SaveFile("output.xml");
 
-    Person deserializedPerson;
-    wrapper >> deserializedPerson;
-    std::cout << "Name: " << deserializedPerson.name << ", Age: " << deserializedPerson.age << std::endl;
+    // Deserialize
+    tinyxml2::XMLDocument doc2;
+    doc2.LoadFile("output.xml");
+    Person person2;
+    XmlElementWrapper wrapper2(doc2.FirstChildElement("root"), "person");
+    wrapper2 >> person2;
 
+    std::cout << "Name: " << person2.getData<std::string>("name") << "\n";
+    std::cout << "Age: " << person2.getData<int>("age") << "\n";
     return 0;
 }
 ```
 
 ## Complex Examples
 Two complex examples are provided:
-- `complex_example.cpp`
+- `complex_example1.cpp`
 - `complex_example2.cpp`
 
 These examples demonstrate more advanced usage of the library including handling complex nested objects and reading from an XML file.
 
 ### Running Complex Example 1
-To compile and run `complex_example.cpp`, use the following commands:
+To compile and run `complex_example1.cpp`, use the following commands:
 ```bash
 mkdir build
 cd build
 cmake ..
 cmake --build .
-./bin/complex_example  # On Linux/Mac
-bin\complex_example.exe  # On Windows
+./bin/complex_example1  # On Linux/Mac
+bin\complex_example1.exe  # On Windows
 ```
 
 ### Running Complex Example 2
