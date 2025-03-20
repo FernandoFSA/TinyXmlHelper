@@ -164,6 +164,36 @@ int main() {
 }
 ```
 
+## Complex Examples
+Two complex examples are provided:
+- `complex_example.cpp`
+- `complex_example2.cpp`
+
+These examples demonstrate more advanced usage of the library including handling complex nested objects and reading from an XML file.
+
+### Running Complex Example 1
+To compile and run `complex_example.cpp`, use the following commands:
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./bin/complex_example  # On Linux/Mac
+bin\complex_example.exe  # On Windows
+```
+
+### Running Complex Example 2
+`complex_example2.cpp` requires an input XML file `resources/complex_example2_input.xml`. Make sure the file is available in the `resources` directory.
+To compile and run `complex_example2.cpp`, use the following commands:
+```bash
+mkdir build
+cd build
+cmake ..
+cmake --build .
+./bin/complex_example2  # On Linux/Mac
+bin\complex_example2.exe  # On Windows
+```
+
 ## Contributing
 Feel free to submit issues or pull requests! This project is open to improvements and feedback.
 

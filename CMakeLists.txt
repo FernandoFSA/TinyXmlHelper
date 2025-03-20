@@ -1,3 +1,7 @@
+
+### Updated `CMakeLists.txt`
+
+```cmake
 # Minimum CMake version required
 cmake_minimum_required(VERSION 3.10)
 
@@ -32,6 +36,10 @@ option(BUILD_EXAMPLES "Build example programs" ON)
 if(BUILD_EXAMPLES)
     add_executable(simple_example examples/simple_example.cpp)
     target_link_libraries(simple_example PRIVATE TinyXmlHelper)
+    add_executable(complex_example examples/complex_example.cpp)
+    target_link_libraries(complex_example PRIVATE TinyXmlHelper)
+    add_executable(complex_example2 examples/complex_example2.cpp)
+    target_link_libraries(complex_example2 PRIVATE TinyXmlHelper)
 endif()
 
 # Installation rules (optional, for users who want to install the library)
