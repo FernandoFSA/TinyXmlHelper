@@ -207,7 +207,7 @@ int main()
     Imput imput;
     try
     {
-        // Test deserialize with missing data
+        // Test deserialize
         if (loadFromFile("complex_example2_input.xml", imput))
         {
             std::cout << "Loaded successfully!" << std::endl;
